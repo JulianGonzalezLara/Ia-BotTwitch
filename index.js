@@ -1,12 +1,14 @@
 import tmi from 'tmi.js'
 import dotenv from 'dotenv'
 import process from 'node:process'
+import IGNORED_USERS from './ignoredUsers.json' assert {type: 'json'}
+import {queryGPT} from './modules/gpt.js'
 
 dotenv.config()
 const USER = process.env.USER
 const PASSWORD = process.env.PASSWORD
 const CHANNEL = 'Juli45G'
-const IGNORED_USERS = ['streamelements']
+// const IGNORED_USERS = ['streamelements']
 
 const client = new tmi.Client({
   options: { debug: false },
@@ -19,7 +21,7 @@ const client = new tmi.Client({
 
 client.connect()
 
-client.on('message', (channel, tags, message, self) => {
+client.on('message', async (channel, tags, message, self) => {
     if (self) return;
 
     //console.log(tags)
@@ -30,8 +32,13 @@ client.on('message', (channel, tags, message, self) => {
     const isSubscriber = tags.subscriber
     const isVip = Boolean(tags.vip)
 
-	console.log(`${channel} ${displayName}: ${message}`)
-  if(isSubscriber){
-    client.say(CHANNEL, `Hola @${username} `)
-  }
+    if (IGNORED_USERS.includes(username)){
+      return
+    }
+
+    if(username === "juli45g"){
+      const { total_tokens, content } = await queryGPT(message)
+      console.log(`${displayName}: ${message}`)
+      console.log(`${content} (${total_tokens})`)
+    }
 })
