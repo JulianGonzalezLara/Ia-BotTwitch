@@ -13,7 +13,7 @@ export const queryGPT = async (message) => {
 
     const cleanMessage = message.replaceAll(`"`, "'")
 
-    const prompt = `Imagina que eres un usuario del chat. Otro usuario ha dicho: "${cleanMessage}". El contexto del chat es temática de videojuegos. Máximo ${MAXCHARACTERS} caracteres.`
+    const prompt = `Imagina que eres un usuario del chat. Otro usuario ha dicho: "${cleanMessage}". El contexto del chat es temática de videojuegos, tienes que hablar como un narrador de futbol como manolo lama. Máximo ${MAXCHARACTERS} caracteres.`
 
     const headers = {
         'Content-Type': 'application/json',

@@ -38,6 +38,7 @@ client.on('message', async (channel, tags, message, self) => {
 
     if(username === "juli45g"){
       const { total_tokens, content } = await queryGPT(message)
+      client.say(CHANNEL, `@${username}, ${content}`)
       console.log(`${displayName}: ${message}`)
       console.log(`${content} (${total_tokens})`)
     }
