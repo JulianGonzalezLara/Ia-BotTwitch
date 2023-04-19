@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import process from 'node:process'
+import { getPersonality } from './personality.js'
 
 dotenv.config({path: '../.env'})
 
@@ -12,8 +13,9 @@ export const queryGPT = async (message) => {
     const API_URL = 'https://api.openai.com/v1/chat/completions'
 
     const cleanMessage = message.replaceAll(`"`, "'")
+    const {type, personality} = getPersonality()
 
-    const prompt = `Imagina que eres un usuario del chat. Otro usuario ha dicho: "${cleanMessage}". El contexto del chat es temática de videojuegos, tienes que hablar como un narrador de futbol como manolo lama. Máximo ${MAXCHARACTERS} caracteres.`
+    const prompt = `Imagina que eres un usuario del chat. Otro usuario ha dicho: "${cleanMessage}".${personality}. El contexto del chat es temática de videojuegos, tienes que hablar como un narrador de futbol como manolo lama. Máximo ${MAXCHARACTERS} caracteres.`
 
     const headers = {
         'Content-Type': 'application/json',
@@ -45,12 +47,14 @@ export const queryGPT = async (message) => {
 
         return {
             total_tokens,
-            content
+            content,
+            type
         }
     }catch (error) {
         return {
             total_tokens: 0,
-            content: 'No se ha podido completar la petición.'
+            content: 'No se ha podido completar la petición.',
+            type: 'error'
         }
     }
 

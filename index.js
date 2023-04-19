@@ -36,10 +36,17 @@ client.on('message', async (channel, tags, message, self) => {
       return
     }
 
-    if(username === "juli45g"){
-      const { total_tokens, content } = await queryGPT(message)
+    const isChoosen = Math.floor(Math.random() * 5) === 0
+
+    if(isChoosen){
+      const { total_tokens, content, type } = await queryGPT(message)
       client.say(CHANNEL, `@${username}, ${content}`)
       console.log(`${displayName}: ${message}`)
-      console.log(`${content} (${total_tokens})`)
+      console.log(`${content} (${total_tokens}), (${type})`)
+    } else if(username === "juli45g"){
+      const { total_tokens, content, type } = await queryGPT(message)
+      client.say(CHANNEL, `@${username}, ${content}`)
+      console.log(`${displayName}: ${message}`)
+      console.log(`${content} (${total_tokens}), (${type})`)
     }
 })
