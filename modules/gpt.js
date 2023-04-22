@@ -2,7 +2,8 @@ import dotenv from 'dotenv'
 import process from 'node:process'
 import { getPersonality } from './personality.js'
 
-dotenv.config({path: '../.env'})
+//dotenv.config({path: '../.env'})
+dotenv.config()
 
 // const trim = (message) => message.trim().replace(/^"|"$/g, "")
 
