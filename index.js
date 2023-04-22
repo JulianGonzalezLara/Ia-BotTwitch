@@ -38,7 +38,9 @@ client.on('message', async (channel, tags, message, self) => {
 
     const isChoosen = Math.floor(Math.random() * 5) === 0
 
-    if(isChoosen){
+    const isLongMessage = message.length > 30
+
+    if(isChoosen && isLongMessage){
       const { total_tokens, content, type } = await queryGPT(message)
       client.say(CHANNEL, `@${username}, ${content}`)
       console.log(`${displayName}: ${message}`)
