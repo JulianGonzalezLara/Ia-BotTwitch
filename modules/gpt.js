@@ -13,8 +13,6 @@ export const queryGPT = async (message) => {
     const MODEL = 'gpt-3.5-turbo'
     const API_URL = 'https://api.openai.com/v1/chat/completions'
 
-    console.log(KEY_GPT);
-
     const cleanMessage = message.replaceAll(`"`, "'")
     const {type, personality} = getPersonality()
 
