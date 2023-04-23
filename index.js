@@ -42,7 +42,7 @@ client.on('message', async (channel, tags, message, self) => {
 
     if(isChoosen && isLongMessage){
       const { total_tokens, content, type } = await queryGPT(message)
-      if (personality === "error" || total_tokens === 0) {
+      if (type === "error" || total_tokens === 0) {
         return
       }
       client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
@@ -56,7 +56,7 @@ client.on('message', async (channel, tags, message, self) => {
       client.say(CHANNEL, `@${username}, ${content}`)
     } else if(username === "juli45g"){
       const { total_tokens, content, type } = await queryGPT(message)
-      if (personality === "error" || total_tokens === 0) {
+      if (type === "error" || total_tokens === 0) {
         return
       }
       client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
