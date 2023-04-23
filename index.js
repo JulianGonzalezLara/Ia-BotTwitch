@@ -50,7 +50,7 @@ client.on('message', async (channel, tags, message, self) => {
       // console.log(`${content} (${total_tokens}), (${type})`)
     } else if(isFirstMessage){
       const { total_tokens, content } = await queryGPTFirstMessage(message)
-      if (personality === "error" || total_tokens === 0) {
+      if (total_tokens === 0) {
         return
       }
       client.say(CHANNEL, `@${username}, ${content}`)
