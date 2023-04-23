@@ -62,6 +62,6 @@ client.on('message', async (channel, tags, message, self) => {
       client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
     }else if(username === "cheegoo_"){
       console.log("/timeout cheegoo_ 1 por que si")
-      client.say(CHANNEL, "/timeout cheegoo_ 1 por que si")
+      client.timeout(CHANNEL, "cheegoo_", 1, "por que si")
     }
 })
