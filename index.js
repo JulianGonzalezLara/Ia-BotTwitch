@@ -42,14 +42,23 @@ client.on('message', async (channel, tags, message, self) => {
 
     if(isChoosen && isLongMessage){
       const { total_tokens, content, type } = await queryGPT(message)
+      if (personality === "error" || total_tokens === 0) {
+        return
+      }
       client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
       // console.log(`${displayName}: ${message}`)
       // console.log(`${content} (${total_tokens}), (${type})`)
     } else if(isFirstMessage){
-      const { total_tokens, content, type } = await queryGPTFirstMessage(message)
+      const { total_tokens, content } = await queryGPTFirstMessage(message)
+      if (personality === "error" || total_tokens === 0) {
+        return
+      }
       client.say(CHANNEL, `@${username}, ${content}`)
     } else if(username === "juli45g"){
       const { total_tokens, content, type } = await queryGPT(message)
+      if (personality === "error" || total_tokens === 0) {
+        return
+      }
       client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
     }
 })

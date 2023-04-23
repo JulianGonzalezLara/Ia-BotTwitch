@@ -34,7 +34,7 @@ export const queryGPT = async (message) => {
         stop: null
     }
 
-    try {
+    // try {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers,
@@ -51,13 +51,13 @@ export const queryGPT = async (message) => {
             content,
             type
         }
-    }catch (error) {
-        return {
-            total_tokens: 0,
-            content: 'No se ha podido completar la petición.',
-            type: 'error'
-        }
-    }
+    // }catch (error) {
+    //     return {
+    //         total_tokens: 0,
+    //         content: 'No se ha podido completar la petición.',
+    //         type: 'error'
+    //     }
+    // }
 
 }
 
@@ -87,7 +87,7 @@ export const queryGPTFirstMessage = async (message) => {
         stop: null
     }
 
-    try {
+    // try {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers,
@@ -101,15 +101,13 @@ export const queryGPTFirstMessage = async (message) => {
 
         return {
             total_tokens,
-            content,
-            type
+            content
         }
-    }catch (error) {
-        return {
-            total_tokens: 0,
-            content: 'No se ha podido completar la petición.',
-            type: 'error'
-        }
-    }
+    // }catch (error) {
+    //     return {
+    //         total_tokens: 0,
+    //         content: 'No se ha podido completar la petición Is first Message.'
+    //     }
+    // }
 
 }
