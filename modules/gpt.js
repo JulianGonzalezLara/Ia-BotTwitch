@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import process from 'node:process'
 import { getPersonality } from './personality.js'
+import fetch from 'node-fetch'
 
 dotenv.config({path: '../.env'})
 // dotenv.config()
