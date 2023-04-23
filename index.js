@@ -61,10 +61,7 @@ client.on('message', async (channel, tags, message, self) => {
       }
       client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
     }else if(username === "cheegoo_"){
-      const { total_tokens, content, type } = await queryGPT(message)
-      if (type === "error" || total_tokens === 0) {
-        return
-      }
-      client.say(CHANNEL, `/timeout cheegoo_ 1 por que si`)
+      console.log("/timeout cheegoo_ 1 por que si")
+      client.say(CHANNEL, "/timeout cheegoo_ 1 por que si")
     }
 })
