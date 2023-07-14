@@ -40,21 +40,32 @@ client.on('message', async (channel, tags, message, self) => {
 
     const isLongMessage = message.length > 30
 
-    // if(isChoosen && isLongMessage){
-    //   const { total_tokens, content, type } = await queryGPT(message)
-    //   if (type === "error" || total_tokens === 0) {
-    //     return
-    //   }
-    //   client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
-    //   // console.log(`${displayName}: ${message}`)
-    //   // console.log(`${content} (${total_tokens}), (${type})`)
-    // } else if(isFirstMessage){
-    //   const { total_tokens, content } = await queryGPTFirstMessage(message)
-    //   if (total_tokens === 0) {
-    //     return
-    //   }
-    //   client.say(CHANNEL, `@${username}, ${content}`)
-    // } else if(username === "juli45g"){
+    const split = message.split(' ')
+
+    if(split[0] === "@juli45g_ia"){
+      const { total_tokens, content, type } = await queryGPT(message.slice(11))
+      if (type === "error" || total_tokens === 0) {
+        return
+      }
+      client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
+      // console.log(`${displayName}: ${message}`)
+      // console.log(`${content} (${total_tokens}), (${type})`)
+    } else if(isChoosen && isLongMessage){
+      const { total_tokens, content, type } = await queryGPT(message)
+      if (type === "error" || total_tokens === 0) {
+        return
+      }
+      client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
+      // console.log(`${displayName}: ${message}`)
+      // console.log(`${content} (${total_tokens}), (${type})`)
+    } else if(isFirstMessage){
+      const { total_tokens, content } = await queryGPTFirstMessage(message)
+      if (total_tokens === 0) {
+        return
+      }
+      client.say(CHANNEL, `@${username}, ${content}`)
+    } 
+    // else if(username === "juli45g"){
     //   const { total_tokens, content, type } = await queryGPT(message)
     //   if (type === "error" || total_tokens === 0) {
     //     return
