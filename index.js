@@ -36,7 +36,7 @@ client.on('message', async (channel, tags, message, self) => {
       return
     }
 
-    const isChoosen = Math.floor(Math.random() * 3) === 0
+    const isChoosen = Math.floor(Math.random() * 10) === 0
 
     const isLongMessage = message.length > 30
 
