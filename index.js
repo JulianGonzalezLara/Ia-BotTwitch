@@ -2,7 +2,7 @@ import tmi from 'tmi.js'
 import dotenv from 'dotenv'
 import process from 'node:process'
 import IGNORED_USERS from './ignoredUsers.json' assert {type: 'json'}
-import {queryGPT} from './modules/gpt.js'
+import {queryGPT, queryGPTChiste} from './modules/gpt.js'
 import {queryGPTFirstMessage} from './modules/gpt.js'
 
 dotenv.config()
@@ -43,11 +43,20 @@ client.on('message', async (channel, tags, message, self) => {
     const split = message.split(' ')
 
     if(split[0] === "@juli45g_ia"){
-      const { total_tokens, content, type } = await queryGPT(message.slice(11))
-      if (type === "error" || total_tokens === 0) {
-        return
+
+      if(split[1] === "chiste"){
+        const { total_tokens, content, type } = await queryGPTChiste()
+        if (type === "error" || total_tokens === 0) {
+          return
+        }
+        client.say(CHANNEL, `@${username}, ${content}`)
+      } else{
+        const { total_tokens, content, type } = await queryGPT(message.slice(11))
+        if (type === "error" || total_tokens === 0) {
+          return
+        }
+        client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
       }
-      client.say(CHANNEL, `@${username} Personalidad: ${type}, ${content}`)
       // console.log(`${displayName}: ${message}`)
       // console.log(`${content} (${total_tokens}), (${type})`)
     } else if(isChoosen && isLongMessage){

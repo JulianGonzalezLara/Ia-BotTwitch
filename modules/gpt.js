@@ -111,3 +111,52 @@ export const queryGPTFirstMessage = async (message) => {
     }
 
 }
+
+export const queryGPTChiste = async () => {
+    const KEY_GPT = process.env.KEY_GPT
+    const MAXCHARACTERS = 100
+    const MODEL = 'gpt-3.5-turbo'
+    const API_URL = 'https://api.openai.com/v1/chat/completions'
+
+    const prompt = `Cuentame un chiste distinto, nuevo, que no hayas repetido antes`
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${KEY_GPT}`
+    }
+
+    const body = {
+        messages:[{
+            "role": "user",
+            "content": prompt
+        }],
+        model: MODEL,
+        max_tokens: MAXCHARACTERS,
+        n: 1,
+        stop: null
+    }
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body)
+        })
+
+        const data = await response.json()
+
+        const { total_tokens } = data.usage; 
+        const { content } = data.choices[0].message;
+
+        return {
+            total_tokens,
+            content
+        }
+    }catch (error) {
+        return {
+            total_tokens: 0,
+            content: 'No se ha podido completar la petición Is first Message.'
+        }
+    }
+
+}
