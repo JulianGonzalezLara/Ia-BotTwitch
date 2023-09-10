@@ -112,13 +112,15 @@ export const queryGPTFirstMessage = async (message) => {
 
 }
 
-export const queryGPTChiste = async () => {
+export const queryGPTChiste = async (message) => {
     const KEY_GPT = process.env.KEY_GPT
     const MAXCHARACTERS = 100
     const MODEL = 'gpt-3.5-turbo'
     const API_URL = 'https://api.openai.com/v1/chat/completions'
 
-    const prompt = `Cuentame un chiste distinto, nuevo, que no hayas repetido antes`
+    const cleanMessage = message.replaceAll(`"`, "'")
+
+    const prompt = `Cuentame un "${cleanMessage}", que sea nuevo distinto y que no hayas repetido antes`
 
     const headers = {
         'Content-Type': 'application/json',

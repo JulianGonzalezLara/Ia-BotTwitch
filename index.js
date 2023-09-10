@@ -45,7 +45,7 @@ client.on('message', async (channel, tags, message, self) => {
     if(split[0] === "@juli45g_ia"){
 
       if(split[1] === "chiste"){
-        const { total_tokens, content, type } = await queryGPTChiste()
+        const { total_tokens, content, type } = await queryGPTChiste(message)
         if (type === "error" || total_tokens === 0) {
           return
         }
