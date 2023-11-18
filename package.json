@@ -15,8 +15,5 @@
     "dotenv": "^16.0.3",
     "node-fetch": "^3.3.1",
     "tmi.js": "^1.8.5"
-  },
-  "devDependencies": {
-    "tmi.js": "^1.8.5"
   }
 }
