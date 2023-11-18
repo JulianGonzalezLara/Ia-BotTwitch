@@ -4,13 +4,13 @@ import process from 'node:process'
 import IGNORED_USERS from './ignoredUsers.json' assert {type: 'json'}
 import {queryGPT, queryGPTChiste} from './modules/gpt.js'
 import {queryGPTFirstMessage} from './modules/gpt.js'
+import express from 'express'
 
 dotenv.config()
 const USER = process.env.USER
 const PASSWORD = process.env.PASSWORD
 const CHANNEL = 'Juli45G'
 
-const express = require("express");
 const app = express();
 
 // This line is important to ensure your app listens to the PORT env var
